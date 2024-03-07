@@ -32,3 +32,10 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(2fd23497-4700-40ff-b3f0-6ed5abd70e18)'
+    appType: 'webAppLinux'
+    appName: 'propertymanagement'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'DOTNETCORE|7.0'
