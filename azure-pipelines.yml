@@ -32,6 +32,18 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    connectedServiceName: $(ServiceConnectionName)
+    deploymentName: $(Build.BuildNumber)
+    location: $(deploymentDefaultLocation)
+    resourceGroupName: $(ResourceGroupName)
+    csmFile: infra/main.bicep
+    overrideParameters: >
+      -environmentType $(EnvironmentType)
+      -deployToyManualsStorageAccount $(DeployToyManualsStorageAccount)
+
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Pay-As-You-Go(2fd23497-4700-40ff-b3f0-6ed5abd70e18)'
