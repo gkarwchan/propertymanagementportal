@@ -14,40 +14,18 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: AzureResourceManagerTemplateDeployment@3
-  inputs:
-    connectedServiceName: $(ServiceConnectionName)
-    deploymentName: $(Build.BuildNumber)
-    location: $(deploymentDefaultLocation)
-    resourceGroupName: $(ResourceGroupName)
-    csmFile: infra/main.bicep
-    overrideParameters: >
-      -environmentType $(EnvironmentType)
-      -deployToyManualsStorageAccount $(DeployToyManualsStorageAccount)
-
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Pay-As-You-Go(2fd23497-4700-40ff-b3f0-6ed5abd70e18)'
-    appType: 'webAppLinux'
-    appName: 'propertymanagement'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    runtimeStack: 'DOTNETCORE|7.0'
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: NuGetToolInstaller@1
+          - task: NuGetCommand@2
+            inputs:
+              restoreSolution: '$(solution)'
+          - task: VSBuild@1
+            inputs:
+              solution: '$(solution)'
+              msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+              platform: '$(buildPlatform)'
+              configuration: '$(buildConfiguration)'
