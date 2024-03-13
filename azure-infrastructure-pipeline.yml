@@ -11,15 +11,23 @@ trigger:
   paths:
     include:
       - infra
-
+variables:
+  - name: deploymentDefaultLocation
+    value: centralus
+  - name: ResourceGroupName
+    value: dev-PropertyManagement
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+- job:
+  steps:
+  - task: AzureResourceManagerTemplateDeployment@3
+    inputs:
+      deploymentScope: "Resource Group"
+      connectedServiceName: $(PropertyDevConnection)
+      deploymentName: $(Build.BuildNumber)
+      location: $(deploymentDefaultLocation)
+      resourceGroupName: $(ResourceGroupName)
+      csmFile: infra/main.bicep
+      csmParametersFile: infra/dev.param.json
