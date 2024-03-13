@@ -4,7 +4,7 @@ We are going to create a resource group for our application.
 The resource group will have the pattern {environment}-PropertyManagement, where enviroment will be either: dev, test, production.  
 Then we will create a `Service Principal` that will be used by Azure Pipeline to deploy our application to Azure.  
 
-The code is in [setup_azure_dev](../infra/setup_azure_dev.ps1).  
+The code is in [setup_azure_dev](../scripts/setup_azure_dev.ps1).  
 
 ```powershell
 $ErrorActionPreference = "Stop"
