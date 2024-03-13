@@ -30,8 +30,15 @@ stages:
               msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
               platform: '$(buildPlatform)'
               configuration: '$(buildConfiguration)'
+          
   - stage: Deployment
     jobs:
-      - job: deploy-web-app
+      - job: deploy_web_app
         steps:
-          
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'propertyManagementDev'
+              appType: 'webApp'
+              WebAppName: 'webapp-laohv6qoripxq'
+              packageForLinux: '$(build.artifactStagingDirectory)/WebApp.zip'
