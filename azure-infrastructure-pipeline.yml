@@ -30,4 +30,4 @@ jobs:
       location: $(deploymentDefaultLocation)
       resourceGroupName: $(ResourceGroupName)
       csmFile: infra/main.bicep
-      csmParametersFile: infra/dev.param.json
+      csmParametersFile: infra/dev.params.json
