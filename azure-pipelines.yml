@@ -35,10 +35,16 @@ stages:
             displayName: 'publish the project'
             inputs:
               command: 'publish'
-              arguments: '--configuration Release'
+              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
               projects: '**/*.csproj'
-              publishWebProjects: true
-              zipAfterPublish: true          
+              publishWebProjects: false
+              zipAfterPublish: true      
+          - task: PublishBuildArtifacts@1
+            displayName: 'publish artifacts'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+            condition: succeeded()
   - stage: Deployment
     jobs:
       - job: deploy_web_app
