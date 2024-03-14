@@ -35,10 +35,10 @@ stages:
     jobs:
       - job: deploy_web_app
         steps:
-          - task: AzureRmWebAppDeployment@4
+          - task: AzureWebApp@1
             inputs:
-              ConnectionType: 'AzureRM'
-              azureSubscription: 'propertyManagementDev'
+              azureSubscription: '$(azureConnectionDev)'
               appType: 'webApp'
-              WebAppName: 'webapp-laohv6qoripxq'
-              packageForLinux: '$(build.artifactStagingDirectory)/WebApp.zip'
+              appName: 'webapp-laohv6qoripxq'
+              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              deploymentMethod: 'auto'
