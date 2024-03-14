@@ -20,17 +20,25 @@ stages:
     jobs:
       - job: Build
         steps:
-          - task: NuGetToolInstaller@1
-          - task: NuGetCommand@2
-            inputs:
-              restoreSolution: '$(solution)'
-          
           - task: DotNetCoreCLI@2
+            displayName: 'Restore dependencies'
+            inputs:
+              command: 'restore'
+              projects: '**/*.csproj'
+          - task: DotNetCoreCLI@2
+            displayName: 'Build the project'
+            inputs:
+              command: 'build'
+              arguments: '--configuration Release'
+              projects: '**/*.csproj'
+          - task: DotNetCoreCLI@2
+            displayName: 'publish the project'
             inputs:
               command: 'publish'
+              arguments: '--configuration Release'
+              projects: '**/*.csproj'
               publishWebProjects: true
-              zipAfterPublish: true
-          
+              zipAfterPublish: true          
   - stage: Deployment
     jobs:
       - job: deploy_web_app
