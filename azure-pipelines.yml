@@ -46,13 +46,23 @@ stages:
               ArtifactName: 'drop'
             condition: succeeded()
   - stage: Deployment
+    dependsOn: Build
     jobs:
-      - job: deploy_web_app
-        steps:
-          - task: AzureWebApp@1
-            inputs:
-              azureSubscription: '$(azureConnectionDev)'
-              appType: 'webApp'
-              appName: 'webapp-laohv6qoripxq'
-              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-              deploymentMethod: 'auto'
+      - deployment: deploy_web_app
+        environment: dev
+        variables:
+          - group: Release
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: 'drop'
+                - task: AzureWebApp@1
+                  displayName: 'Deploy to azure web app'
+                  inputs:
+                    azureSubscription: '$(azureConnectionDev)'
+                    appType: 'webApp'
+                    appName: 'webapp-laohv6qoripxq'
+                    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+                    deploymentMethod: 'auto'
