@@ -24,10 +24,12 @@ stages:
           - task: NuGetCommand@2
             inputs:
               restoreSolution: '$(solution)'
+          
           - task: DotNetCoreCLI@2
             inputs:
               command: 'publish'
               publishWebProjects: true
+              zipAfterPublish: true
           
   - stage: Deployment
     jobs:
