@@ -8,6 +8,7 @@
         "appServicePlanInstanceCount": {
             "value": 1
         },
+        "storageAccountSku" : "Standard_LRS",
         "appServiceSku":{
             "value": {
                 "name": "F1",
