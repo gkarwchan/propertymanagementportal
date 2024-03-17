@@ -4,14 +4,6 @@ param location string = resourceGroup().location
 @description('storage Account SKU')
 param storageAccountSku string
 
-@description('environment name')
-@allowed([
-  'dev'
-  'test'
-  'pre'
-  'prod'
-])
-param environmentName string
 
 @description('app service plan instance count')
 @minValue(1)
@@ -28,7 +20,7 @@ module storageAccount 'modules/storageAccounts.bicep' = {
   params: {
     solutionId: solutionId
     location: location
-    storageSku: storageAccountSku
+    storageAccountSku: storageAccountSku
   }
 }
 
