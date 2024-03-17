@@ -8,7 +8,7 @@ param location string = resourceGroup().location
 param storageAccountSku string
 
 resource boardDocuments 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: 'brdDocs${solutionId}'
+  name: take('brdDocs${solutionId}', 24)
   location: location
   sku: {
     name: storageAccountSku
