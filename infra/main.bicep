@@ -23,7 +23,7 @@ param appServiceSku object
 var solutionId = uniqueString(resourceGroup().id)
 
 @description('deploy storage account')
-module storageAccount 'modules/storageAccount.bicep' = {
+module storageAccount 'modules/storageAccounts.bicep' = {
   name: 'storageAccount'
   params: {
     solutionId: solutionId
