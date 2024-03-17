@@ -5,13 +5,13 @@ param solutionId string
 param location string = resourceGroup().location
 
 @description('storage account SKU')
-param storageSku string
+param storageAccountSku string
 
 resource boardDocuments 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   name: 'brdDocs${solutionId}'
   location: location
   sku: {
-    name: storageSku
+    name: storageAccountSku
   }
   kind: 'StorageV2'
   properties: {

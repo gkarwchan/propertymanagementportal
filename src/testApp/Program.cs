@@ -9,3 +9,8 @@ builder.SetBasePath(Directory.GetCurrentDirectory())
  
 IConfiguration config = builder.Build();
 Console.WriteLine($"Build add: {config["blobConnection"]}");
+
+var storageClient = new StorageClient(config["blobConnection"]);
+
+
+Console.WriteLine("ddd");
