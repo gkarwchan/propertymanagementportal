@@ -7,8 +7,10 @@ param location string = resourceGroup().location
 @description('storage account SKU')
 param storageAccountSku string
 
+var resourceName = take('brddocs${solutionId}', 24)
+
 resource boardDocuments 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: take('brdDocs${solutionId}', 24)
+  name: resourceName
   location: location
   sku: {
     name: storageAccountSku
@@ -67,3 +69,5 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
   }
 
 }
+
+output storageName string = resourceName
