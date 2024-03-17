@@ -1,6 +1,9 @@
 @description('region to deploy the resources')
 param location string = resourceGroup().location
 
+@description('storage Account SKU')
+param storageAccountSku string
+
 @description('environment name')
 @allowed([
   'dev'
@@ -18,6 +21,16 @@ param appServicePlanInstanceCount int
 param appServiceSku object
 
 var solutionId = uniqueString(resourceGroup().id)
+
+@description('deploy storage account')
+module storageAccount 'modules/storageAccount.bicep' = {
+  name: 'storageAccount'
+  params: {
+    solutionId: solutionId
+    location: location
+    storageSku: storageAccountSku
+  }
+}
 
 
 @description('App Service components')
