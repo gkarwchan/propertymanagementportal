@@ -22,7 +22,7 @@ resource boardDocuments 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 
 resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPolicies@2023-01-01' = {
-  name: 'boardDocumentPolicies'
+  name: 'default'
   parent:boardDocuments
   properties: {
     policy: {
@@ -35,9 +35,9 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             actions: {
               baseBlob: {
                 tierToCool: { daysAfterCreationGreaterThan: 90 }
-                tierToCold: { daysAfterLastTierChangeGreaterThan: 90 }
+                tierToCold: { daysAfterCreationGreaterThan: 180 }
                 tierToArchive: { daysAfterCreationGreaterThan: 550 }
-                delete: {daysAfterLastTierChangeGreaterThan: 550 }
+                delete: {daysAfterCreationGreaterThan: 1100 }
               }
             }
             filters: {
@@ -54,7 +54,7 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             actions: {
               baseBlob: {
                 tierToCool: { daysAfterCreationGreaterThan: 60 }
-                tierToCold: { daysAfterLastTierChangeGreaterThan: 90 }
+                tierToCold: { daysAfterCreationGreaterThan: 150 }
                 tierToArchive: { daysAfterCreationGreaterThan: 265 }
               }
             }
