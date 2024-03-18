@@ -42,7 +42,13 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             }
             filters: {
               blobTypes: [ 'blockBlob' ]
-              prefixMatch: [ 'boardMeetings/' ]
+              blobIndexMatch: [ 
+                {
+                  name : 'category'
+                  op : '=='
+                  value: 'board-meetings'
+                }
+              ]
             }
           }
         }
@@ -60,7 +66,13 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             }
             filters: {
               blobTypes: [ 'blockBlob' ]
-              prefixMatch: [ 'legalDocuments/' ]
+              blobIndexMatch: [
+                {
+                  name: 'category'
+                  op: '=='
+                  value: 'legal-documents'
+                }
+              ]
             }            
           }
         }
