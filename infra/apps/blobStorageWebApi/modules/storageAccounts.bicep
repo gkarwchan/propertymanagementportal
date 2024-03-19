@@ -42,7 +42,13 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             }
             filters: {
               blobTypes: [ 'blockBlob' ]
-              prefixMatch: [ 'boardMeetings/' ]
+              blobIndexMatch: [ 
+                {
+                  name : 'category'
+                  op : '=='
+                  value: 'board-meetings'
+                }
+              ]
             }
           }
         }
@@ -60,7 +66,13 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
             }
             filters: {
               blobTypes: [ 'blockBlob' ]
-              prefixMatch: [ 'legalDocuments/' ]
+              blobIndexMatch: [
+                {
+                  name: 'category'
+                  op: '=='
+                  value: 'legal-documents'
+                }
+              ]
             }            
           }
         }
@@ -69,5 +81,32 @@ resource boardDocumentsPolicies 'Microsoft.Storage/storageAccounts/managementPol
   }
 
 }
+
+resource containerTableService 'Microsoft.Storage/storageAccounts/tableServices@2023-01-01' = {
+  name: 'default'
+  parent: boardDocuments
+  properties: {
+    cors: {
+      corsRules: [
+        {
+          allowedHeaders: [  ]
+          allowedMethods: [ 'GET', 'PATCH', 'POST', 'DELETE' ]
+          allowedOrigins: [ '*' ]
+          exposedHeaders: [ ]
+          maxAgeInSeconds: 1000
+        }
+      ]
+    }
+  }
+}
+
+resource containerBuildingMap 'Microsoft.Storage/storageAccounts/tableServices/tables@2023-01-01' = {
+  name: 'string'
+  parent: containerTableService
+  properties: {
+    
+  }
+}
+
 
 output storageName string = resourceName
