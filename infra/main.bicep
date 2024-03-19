@@ -14,9 +14,18 @@ param appServiceSku object
 
 var solutionId = uniqueString(resourceGroup().id)
 
-@description('deploy storage account')
-module storageAccount 'modules/storageAccounts.bicep' = {
-  name: 'storageAccount'
+// @description('deploy storage account')
+// module storageAccount 'modules/storageAccounts.bicep' = {
+//   name: 'storageAccount'
+//   params: {
+//     solutionId: solutionId
+//     location: location
+//     storageAccountSku: storageAccountSku
+//   }
+// }
+
+module appBlobStorageWebApi 'apps/blobStorageWebApi/main.bicep' = {
+  name: 'appBlobStorageWebApi'
   params: {
     solutionId: solutionId
     location: location

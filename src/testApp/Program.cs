@@ -11,6 +11,7 @@ IConfiguration config = builder.Build();
 Console.WriteLine($"Build add: {config["blobConnection"]}");
 
 var storageClient = new StorageClient(config["blobConnection"]);
+var storageContainerClient = storageClient.get("dd")
 
 
 Console.WriteLine("ddd");

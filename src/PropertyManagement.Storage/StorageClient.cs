@@ -8,13 +8,17 @@ public class StorageClient
         _blobServiceClient = new(clientConnectionString);
     }
 
-    public BlobContainerClient GetBloblContainerClient(string containerName)
+    public async Task<BlobContainerClient> CreateBloblContainerClientAsync(string containerName)
     {
-        return _blobServiceClient.GetBlobContainerClient(containerName);
+        var container = _blobServiceClient.GetBlobContainerClient(containerName);
+        await container.CreateIfNotExistsAsync();
+        return container;
     }
-
-    public async Task<BlobContainerClient> CreateContainerAsync(string containerName)
+    public async Task UploadFile(string containerName, string fileName)
     {
-        return await _blobServiceClient.CreateBlobContainerAsync(containerName);
+        var container = _blobServiceClient.GetBlobContainerClient(containerName);
+        var blob = container.GetBlobClient("shareholders-4.pdf");
+
+        await blob.UploadAsync("d:\\code\\shareholders-4.pdf", true);
     }
 }
