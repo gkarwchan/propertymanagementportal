@@ -1,11 +1,20 @@
+using Azure.Data.Tables;
 using Azure.Storage.Blobs;
 
 public class StorageClient
 {
     BlobServiceClient _blobServiceClient;
+    TableServiceClient _tableServiceClient;
+    
     public StorageClient(string clientConnectionString)
     {
         _blobServiceClient = new(clientConnectionString);
+        _tableServiceClient = new TableServiceClient(clientConnectionString);
+    }
+
+    public async Task CreateEntry() 
+    {
+        _tableServiceClient.GetTableClient("dab");
     }
 
     public async Task<BlobContainerClient> CreateBloblContainerClientAsync(string containerName)

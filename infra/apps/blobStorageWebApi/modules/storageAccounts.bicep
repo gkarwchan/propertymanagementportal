@@ -101,7 +101,7 @@ resource containerTableService 'Microsoft.Storage/storageAccounts/tableServices@
 }
 
 resource containerBuildingMap 'Microsoft.Storage/storageAccounts/tableServices/tables@2023-01-01' = {
-  name: 'string'
+  name: 'buildingContainerMap'
   parent: containerTableService
   properties: {
     
