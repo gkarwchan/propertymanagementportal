@@ -10,8 +10,10 @@ builder.SetBasePath(Directory.GetCurrentDirectory())
 IConfiguration config = builder.Build();
 Console.WriteLine($"Build add: {config["blobConnection"]}");
 
-var storageClient = new StorageClient(config["blobConnection"]);
-var storageContainerClient = storageClient.get("dd")
+var blobUtil = new BlobUtil(config["blobConnection"]);
 
+await blobUtil.UploadFile("d:\\tmp\\Pink Card.pdf", "3");
+
+await blobUtil.UploadFile("d:\\tmp\\Pink Card.pdf", "4");
 
 Console.WriteLine("ddd");
