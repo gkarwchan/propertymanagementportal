@@ -16,4 +16,7 @@ await blobUtil.UploadFile("d:\\tmp\\Pink Card.pdf", "3");
 
 await blobUtil.UploadFile("d:\\tmp\\Pink Card.pdf", "4");
 
+await blobUtil.UploadStream("d:\\tmp\\Record of Services.pdf", "3");
+
+await blobUtil.UploadStream("d:\\tmp\\Record of Services.pdf", "4");
 Console.WriteLine("ddd");
