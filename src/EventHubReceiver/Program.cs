@@ -1,4 +1,5 @@
-﻿using Azure.Messaging.EventHubs;
+﻿using System.Text;
+using Azure.Messaging.EventHubs;
 using Azure.Messaging.EventHubs.Consumer;
 using Microsoft.Extensions.Azure;
 
@@ -8,7 +9,7 @@ await using (var consumer = new EventHubConsumerClient(EventHubConsumerClient.De
     cancellationSource.CancelAfter(TimeSpan.FromSeconds(60));
     await foreach (PartitionEvent receivedEvent in consumer.ReadEventsAsync(cancellationSource.Token))
     {
-        Console.WriteLine($"event received: {receivedEvent.Data.ToString()}");
+        Console.WriteLine($"event received: {Encoding.UTF8.GetString(receivedEvent.Data.Body.ToArray())}");
     }
 }
 
