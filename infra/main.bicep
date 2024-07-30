@@ -11,6 +11,8 @@ param storageAccountSku string
 param appServicePlanInstanceCount int
 @description('app service sku')
 param appServiceSku object
+@description('Event Hub SKU')
+param eventHubSku string = 'Standard'
 
 var solutionId = uniqueString(resourceGroup().id)
 
@@ -42,6 +44,17 @@ module appService 'modules/appService.bicep'={
     solutionId: solutionId
     appServicePlanSku: appServiceSku
     appServicePlanInstanceCount: appServicePlanInstanceCount
+  }
+}
+
+
+@description('Event Hub components')
+module eventHub 'apps//messaging/eventHub.bicep'={
+  name: 'eventHub'
+  params: {
+    location: location
+    solutionId: solutionId
+    eventHubSku: eventHubSku
   }
 }
 
