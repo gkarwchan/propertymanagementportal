@@ -4,7 +4,7 @@ using Azure.Messaging.EventHubs.Producer;
 
 int numOfEvents = 3;
 
-EventHubProducerClient producerClient = new EventHubProducerClient("", "");
+EventHubProducerClient producerClient = new EventHubProducerClient("", "myeventhub");
 using EventDataBatch eventBatch = await producerClient.CreateBatchAsync();
 for (int i = 1; i < numOfEvents; i++)
 {
