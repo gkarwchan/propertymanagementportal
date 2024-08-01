@@ -15,54 +15,29 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-stages:
-  - stage: Build
-    jobs:
-      - job: Build
-        steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Restore dependencies'
-            inputs:
-              command: 'restore'
-              projects: '**/*.csproj'
-          - task: DotNetCoreCLI@2
-            displayName: 'Build the project'
-            inputs:
-              command: 'build'
-              arguments: '--configuration Release'
-              projects: '**/*.csproj'
-          - task: DotNetCoreCLI@2
-            displayName: 'publish the project'
-            inputs:
-              command: 'publish'
-              arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
-              projects: '**/*.csproj'
-              publishWebProjects: false
-              zipAfterPublish: true      
-          - task: PublishBuildArtifacts@1
-            displayName: 'publish artifacts'
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: 'drop'
-            condition: succeeded()
-
-    dependsOn: Build
-    jobs:
-      - deployment: deploy_web_app
-        environment: dev
-        variables:
-          - group: Release
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - download: current
-                  artifact: 'drop'
-                - task: AzureWebApp@1
-                  displayName: 'Deploy to azure web app'
-                  inputs:
-                    azureSubscription: '$(azureConnectionDev)'
-                    appType: 'webApp'
-                    appName: 'webapp-laohv6qoripxq'
-                    package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-                    deploymentMethod: 'auto'
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore dependencies'
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: 'Build the project'
+    inputs:
+      command: 'build'
+      arguments: '--configuration Release'
+      projects: '**/*.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: 'publish the project'
+    inputs:
+      command: 'publish'
+      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
+      projects: '**/*.csproj'
+      publishWebProjects: false
+      zipAfterPublish: true      
+  - task: PublishBuildArtifacts@1
+    displayName: 'publish artifacts'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+    condition: succeeded()
