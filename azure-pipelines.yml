@@ -45,7 +45,7 @@ stages:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
               ArtifactName: 'drop'
             condition: succeeded()
-  - stage: Deployment
+
     dependsOn: Build
     jobs:
       - deployment: deploy_web_app
