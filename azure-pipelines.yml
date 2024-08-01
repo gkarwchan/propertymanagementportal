@@ -15,9 +15,9 @@ variables:
 
 steps:
   - task: UseDotNet@2
-    displayName: 'Use .NET SDK 6.x'
+    displayName: 'Use .NET SDK 8.x'
     inputs:
-      version: '6.x'
+      version: '8.x'
   - task: DotNetCoreCLI@2
     displayName: 'Restore dependencies'
     inputs:
