@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubSender", "EventHubS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubReceiver", "EventHubReceiver\EventHubReceiver.csproj", "{23F3727E-98B5-4E7D-98B3-DEC972697F36}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{045E7C2F-DD7E-4EDA-9DFF-E1BAA8DCA431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyManagement.Storage.Tests", "tests\PropertyManagement.Storage.Tests\PropertyManagement.Storage.Tests.csproj", "{F59C6051-F843-44EA-95CA-02AC004AD87D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,12 @@ Global
 		{23F3727E-98B5-4E7D-98B3-DEC972697F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23F3727E-98B5-4E7D-98B3-DEC972697F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23F3727E-98B5-4E7D-98B3-DEC972697F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F59C6051-F843-44EA-95CA-02AC004AD87D} = {045E7C2F-DD7E-4EDA-9DFF-E1BAA8DCA431}
 	EndGlobalSection
 EndGlobal

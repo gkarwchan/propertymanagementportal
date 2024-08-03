@@ -1,17 +1,19 @@
 using Azure.Storage.Blobs;
 
+namespace PropertyManagement.Storage;
+
 public class BlobUtil
 {
 
-    private StorageClient _storageClient;
+    private StorageRegisterer _storageRegisterer;
     public BlobUtil(string connectionString)
     {
-        _storageClient = new StorageClient(connectionString);
+        _storageRegisterer = new StorageRegisterer(connectionString);
     }
     public async Task UploadFile(string localFilePath, string buildingId)
     {
         string fileName = Path.GetFileName(localFilePath);
-        var container = await _storageClient.CreateBuildingContainerIfNotExistAsync(buildingId);
+        var container = await _storageRegisterer.CreateBuildingContainerIfNotExistAsync(buildingId);
         BlobClient blobClient = container.GetBlobClient(fileName);
 
         await blobClient.UploadAsync(localFilePath, true);
@@ -20,7 +22,7 @@ public class BlobUtil
     public async Task UploadStream(string localFilePath, string buildingId)
     {
         string fileName = Path.GetFileName(localFilePath);
-        var container = await _storageClient.CreateBuildingContainerIfNotExistAsync(buildingId);
+        var container = await _storageRegisterer.CreateBuildingContainerIfNotExistAsync(buildingId);
         BlobClient blobClient = container.GetBlobClient(fileName);
         var stream = File.OpenRead(localFilePath);
 

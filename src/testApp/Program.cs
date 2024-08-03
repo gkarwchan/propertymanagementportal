@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
+using PropertyManagement.Storage;
 
 var builder = new ConfigurationBuilder();
 builder.SetBasePath(Directory.GetCurrentDirectory())
