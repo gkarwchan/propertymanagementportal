@@ -1,3 +1,4 @@
+using Azure;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
 
@@ -20,11 +21,11 @@ public class StorageRegisterer(BlobServiceClient blobServiceClient, TableService
     }
 
 
-    private async Task<string> RegisterContainerIfNotExistAsync(string buildingId)
+    public async Task<string> RegisterContainerForBuildingAsync(string buildingId)
     {
         var tableClient = tableServiceClient.GetTableClient(TableName);
         var buildingEntry = await tableClient.GetEntityIfExistsAsync<TableEntity>(PartitionKey, buildingId);
-        if (buildingEntry.Value != null) return buildingEntry.Value.GetString(ContainerField); 
+        if (buildingEntry?.Value != null) return buildingEntry.Value.GetString(ContainerField); 
         var uuid = (Guid.NewGuid()).ToString();
         
         var entry = new TableEntity(PartitionKey, buildingId)
@@ -44,7 +45,7 @@ public class StorageRegisterer(BlobServiceClient blobServiceClient, TableService
 
     public async Task<BlobContainerClient> CreateBuildingContainerIfNotExistAsync(string buildingId)
     {
-        var containerName = await RegisterContainerIfNotExistAsync(buildingId);
+        var containerName = await RegisterContainerForBuildingAsync(buildingId);
         var container = await CreateContainerIfNotExistClientAsync(containerName);
         return container;
     }

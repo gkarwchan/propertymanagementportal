@@ -1,4 +1,5 @@
 ﻿
+using Azure;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
 using Moq;
@@ -26,8 +27,46 @@ public class StorageRegistererTests : IDisposable
     }
 
     [Fact]
-    public void WhenShouldTest()
+    public async Task RegisterContainerIfNotExistAsync_ReturnsExistingUuid()
     {
+        // Arrange
+        var buildingId = "existingBuildingId";
+        var existingUuid = "existing-uuid";
+        var existingEntity = new TableEntity(PartitionKey, buildingId)
+        {
+            { ContainerField, existingUuid }
+        };
+        var response = Response.FromValue(existingEntity, new Mock<Response>().Object);
+        
+        _mockTableClient.Setup(x => x.GetEntityIfExistsAsync<TableEntity>(PartitionKey, buildingId, null, CancellationToken.None))
+            .ReturnsAsync(response);
+
+        // Act
+        var result = await testUnit.RegisterContainerForBuildingAsync(buildingId);
+
+        // Assert
+        Assert.Equal(existingUuid, result);
+    }
+    
+    [Fact]
+    public async Task RegisterContainerIfNotExistAsync_AddsNewEntityAndReturnsUuid()
+    {
+        // Arrange
+        var buildingId = "newBuildingId";
+        TableEntity nullEntity = null;
+        var response = Response.FromValue(nullEntity, new Mock<Response>().Object);
+        
+        _mockTableClient.Setup(x => 
+                x.GetEntityIfExistsAsync<TableEntity>(PartitionKey, buildingId, null, CancellationToken.None))
+            .ReturnsAsync(response);
+
+        // Act
+        var result = await testUnit.RegisterContainerForBuildingAsync(buildingId);
+
+        // Assert
+        Assert.NotNull(result);
+        Guid uuid;
+        Assert.True(Guid.TryParse(result, out uuid)); // Assert that result is a valid GUID
     }
 
     public void Dispose()
