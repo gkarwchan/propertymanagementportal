@@ -39,7 +39,7 @@ steps:
     displayName: 'Run unit tests - $(buildConfiguration)'
     inputs:
       command: 'test'
-      arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourceDirectory)/TestResults/Coverage/'
+      arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
       publishTestResults: true
       projects: '**/*.Tests.csproj'
   - task: DotNetCoreCLI@2
@@ -47,12 +47,12 @@ steps:
     inputs:
       command: custom
       custom: tool
-      arguments: 'run reportgenerator -reports:$(Build.SourceDirectory)/**/coverage.covertura.xml -targetdir:$(Build.SourceDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines'
+      arguments: 'run reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines'
   - task: PublishCodeCoverageResults@1
-    displayName: 'Publish Code Coverage report $(Build.SourceDirectory)'
+    displayName: 'Publish Code Coverage report'
     inputs:
       codeCoverageTool: 'cobertura'
-      summaryFileLocation: '$(Build.SourceDirectory)/**/coverage.cobertura.xml'
+      summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
   - task: DotNetCoreCLI@2
     displayName: 'publish the project'
     inputs:
