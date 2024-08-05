@@ -49,7 +49,7 @@ steps:
       custom: tool
       arguments: 'run reportgenerator -reports:$(Build.SourceDirectory)/**/coverage.covertura.xml -targetdir:$(Build.SourceDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines'
   - task: PublishCodeCoverageResults@1
-    displayName: 'Publish Code Coverage report'
+    displayName: 'Publish Code Coverage report $(Build.SourceDirectory)'
     inputs:
       codeCoverageTool: 'cobertura'
       summaryFileLocation: '$(Build.SourceDirectory)/**/coverage.cobertura.xml'
