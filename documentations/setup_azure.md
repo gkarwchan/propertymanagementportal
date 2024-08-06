@@ -4,6 +4,8 @@ Our DevOps's CD pipeline will deploy to a resource group. So to prepare Azure, i
 1. Create the resource group.
 2. Create a Service Principal that has permissions to deploy to that resource group, and assign it to the CD pipeline.  
 
+The full code is in file: [setup azure script](../scripts/setup_azure_dev.ps1)
+
 ### Create the resource group
 We are going to create a resource group for our application.  
 
