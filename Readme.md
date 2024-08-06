@@ -9,6 +9,6 @@ This is a show application to show capabilities of Azure with .NET.
 ## Documentations: 
 The code contains all necessary CI/CD code to build and deploy the application to Azure.  
 But you need first to setup your Azure subscription to allow deployment from Azure DevOps.  
-To do that start from this step:
+But before CI/CD works, you need to prepare your environment:
 
-1. [Setup Azure](documentations/setup_azure.md).
+[Setup your environment](documentations/setup_environment.md)
