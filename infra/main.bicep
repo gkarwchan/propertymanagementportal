@@ -14,7 +14,7 @@ param appServiceSku object
 @description('Event Hub SKU')
 param eventHubSku string = 'Standard'
 
-var solutionId = uniqueString(resourceGroup().id)
+var solutionId = 'gkar' //uniqueString(resourceGroup().id)
 
 // @description('deploy storage account')
 // module storageAccount 'modules/storageAccounts.bicep' = {
