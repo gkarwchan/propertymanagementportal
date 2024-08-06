@@ -102,5 +102,5 @@ stages:
                   inputs:
                     azureSubscription: '$(azureConnectionDev)'
                     appName: '$(WebAppName)'
-                    package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/PropertyManagementPortal.ManagementUI.zip'
+                    package: '$(Pipeline.Workspace)/drop/Release/PropertyManagementPortal.ManagementUI.zip'
 
