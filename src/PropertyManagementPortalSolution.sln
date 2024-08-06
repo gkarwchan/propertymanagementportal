@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{045E7C2F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyManagement.Storage.Tests", "tests\PropertyManagement.Storage.Tests\PropertyManagement.Storage.Tests.csproj", "{F59C6051-F843-44EA-95CA-02AC004AD87D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyManagement.Portal.UI", "PropertyManagement.Portal.UI\PropertyManagement.Portal.UI.csproj", "{1D3BCED5-2B73-4BD2-92F7-640E565F8440}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F59C6051-F843-44EA-95CA-02AC004AD87D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3BCED5-2B73-4BD2-92F7-640E565F8440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3BCED5-2B73-4BD2-92F7-640E565F8440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3BCED5-2B73-4BD2-92F7-640E565F8440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3BCED5-2B73-4BD2-92F7-640E565F8440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F59C6051-F843-44EA-95CA-02AC004AD87D} = {045E7C2F-DD7E-4EDA-9DFF-E1BAA8DCA431}
