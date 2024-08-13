@@ -12,3 +12,5 @@ But you need first to setup your Azure subscription to allow deployment from Azu
 But before CI/CD works, you need to prepare your environment:
 
 [Setup your environment](documentations/setup_environment.md)
+
+You can add Azure DevOps CLI
