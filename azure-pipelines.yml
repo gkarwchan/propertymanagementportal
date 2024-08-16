@@ -1,4 +1,4 @@
-
+name: Build-Pipeline$(Rev:.r)
 trigger:
   batch: true
   branches:
