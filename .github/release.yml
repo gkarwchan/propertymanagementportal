@@ -1,0 +1,20 @@
+# .github/release.yml
+
+chagelog:
+  exclude:
+    labels:
+    - ignore-for-release
+    authors:
+    - octacat
+  categories:
+    - title: Breaking Changes
+      lables: 
+        - Semver-Major
+        - breaking-change
+    - title: Exciting New Features
+      labels:
+        - Semver-Minor
+        - enhancement
+    - title: Other Changes
+      lables:
+        - *
