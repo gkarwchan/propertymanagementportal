@@ -11,6 +11,6 @@ The code contains all necessary CI/CD code to build and deploy the application t
 But you need first to setup your Azure subscription to allow deployment from Azure DevOps.  
 But before CI/CD works, you need to prepare your environment:
 
-[Setup your environment](documentations/setup_environment.md)
+[Setup your environment](wiki/setup_environment.md)
 
 You can add Azure DevOps CLI
